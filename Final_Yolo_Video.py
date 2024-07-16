@@ -9,6 +9,7 @@ from olympe.video.renderer import PdrawRenderer
 import cv2
 import numpy as np
 
+
 olympe.log.update_config({"loggers": {"olympe": {"level": "WARNING"}}})
 
 #Setting drone IP and RTSP port from the environment variable to establish connection
@@ -20,6 +21,7 @@ Model_Path = r"/home/labpc/Downloads/yolov8n-seg.pt"
 model = YOLO(Model_Path)
 class StreamingExample:
     def __init__(self):
+        
         #Set drone object with IP Address
         self.drone = olympe.Drone(DRONE_IP)
 
@@ -78,6 +80,7 @@ class StreamingExample:
         self.h264_stats_file.close()
 
     def yuv_frame_cb(self, yuv_frame):
+        #Callback to handle the YUV frames; refrence frame & add to queue
         yuv_frame.ref()
         self.frame_queue.put_nowait(yuv_frame)
 
@@ -116,12 +119,15 @@ class StreamingExample:
         return True
 
     def start_cb(self):
+        #Callback for when the streaming strarts
         pass
 
     def end_cb(self):
+        #callback for when the streaming ends
         pass
 
     def h264_frame_cb(self, h264_frame):
+        #Callback handling H.264 frames
         frame_pointer, frame_size = h264_frame.as_ctypes_pointer()
 
         info = h264_frame.info()

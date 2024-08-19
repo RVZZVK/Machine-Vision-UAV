@@ -14,5 +14,7 @@ GPU-TRAIN: This code trains the model, using the GPU of the computer. It uses cu
 
 Final_Version: This code captures the video from the drone, and passes it through the object detection model. It uses a dataframe to log the detected objects, and save it to an excel file when the code is finished. It's also able to control the motion of the drone with the inputs library.
 
+Further details can be found in the report. 
+
 
 
